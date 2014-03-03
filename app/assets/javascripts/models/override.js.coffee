@@ -1,0 +1,1 @@
+class CanvasApp.Models.Override extends Backbone.Model

@@ -1,0 +1,26 @@
+<% if @groups: %>
+  <div class="content">
+    <% for group in @groups: %>
+      <div id="<%= group.id %>" class="row groups-sections">
+        <div class="span3 manual-group"><span class="uneditable-input"><%= group.name %></span></div>
+        <div class="span3 manual-section">
+          <select name="manual-sections" class="selectpicker" title='Choose Sections to Sync' multiple>
+            <% for section in @sections: %>
+              <option value="<%= section.id %>"><%= section.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+    <% end %>    
+  </div>
+  <div class="page_navigation pagination"></div>
+  <div class="btn-group manual-sync-buttons">
+    <button class="btn finish-manual-sync">Run Manual Sync</button>
+    <button class="btn export-csv">Export to CSV</button>
+  </div>
+<% else: %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No Groups Found</strong> Check Group Category in Canvas
+  </div>
+<% end %>

@@ -1,0 +1,150 @@
+/* Production URL https://s3.amazonaws.com/SSL_Assets/wharton/wharton4.css */
+#header {
+  background: url("https://s3.amazonaws.com/SSL_Assets/wharton/header_bg.jpg") repeat-x scroll left center transparent;
+  min-height: 71px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+  #header {
+    background: url("https://s3.amazonaws.com/SSL_Assets/wharton/header_bg.jpg") repeat-x scroll left center transparent;
+    background-size: 100% auto;
+  }
+}
+
+#header-logo, #header.no-user #header-logo {
+    background: url("https://s3.amazonaws.com/SSL_Assets/wharton/header_logo.png") no-repeat scroll 0 0 transparent;
+    bottom: 10px;
+    height: 50px;
+    left: 6px;
+    width: 191px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+  #header-logo, #header.no-user #header-logo {
+    background: url("https://s3.amazonaws.com/SSL_Assets/wharton/header_logo.png") no-repeat scroll 0 0 transparent;
+    background-size: 100% auto;
+  }
+}
+
+/* Make the min-height smaller for the header when you are not logged in 
+   because the logo is taller */
+#header.no-user {
+  min-height: 71px;
+}
+
+#header-logo-secondary {
+  background: url("https://s3.amazonaws.com/SSL_Assets/wharton/header_canvas_logo.png?") no-repeat scroll 0 0 transparent;
+  bottom: 11px;
+  display: block;
+  height: 26px;
+  position: absolute;
+  right: 26px;
+  width: 135px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+  #header-logo-secondary {
+    background: url("https://s3.amazonaws.com/SSL_Assets/wharton/header_canvas_logo.png?") no-repeat scroll 0 0 transparent;
+    background-size: 80% auto;
+  }
+}
+
+/* Make room for the menu since the wharton logo is bigger than default canvas logo */
+#menu { margin-left: 200px; }
+
+/* Make the menu lettering white and make it go back to grey when you hover over */
+.menu-item .menu-item-title, .menu-item .menu-item-no-drop { color: #FFFFFF; }
+.menu-item.hover .menu-item-title { color: #555555; }
+
+/* Style the #identity in top right */
+#identity { background: none; }
+#identity { background-color: #971D32; }
+#identity .user_name a{ color: #DC8894 !important; }
+#identity a { color: #fff; }
+#identity #feedback_link{ border-color: #333; background-color: #333; }
+#identity .inbox a .unread-messages-count { background-color: #333; }
+
+/* These are items are for the login page */
+.second-password-reset .button { 
+
+  color: white; 
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+  overflow: visible;
+  padding: 4px 10px;
+  position: relative;
+  text-align: center;
+  text-decoration: none!important;
+  vertical-align: middle;
+  zoom: 1;
+
+  background-color: #06abee;
+  background-image: -moz-linear-gradient(top,#0abeff,#008fd6);
+  background-image: -ms-linear-gradient(top,#0abeff,#008fd6);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#0abeff),to(#008fd6));
+  background-image: -webkit-linear-gradient(top,#0abeff,#008fd6);
+  background-image: -o-linear-gradient(top,#0abeff,#008fd6);
+  background-image: linear-gradient(top,#0abeff,#008fd6);
+  background-repeat: repeat-x;
+  border: 1px solid #ccc;
+  border-bottom-color: #b3b3b3;
+  border-color: #008fd6 #008fd6 #005c8a;
+  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) fadein(rgba(0,0,0,0.1),15%);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0ABEFF',endColorstr='#FF008FD6',GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  -webkit-border-radius: 4px;
+}
+
+body.modal #modal-box {
+  background-color: #ebebeb;
+  border: 1px solid #888;
+  border-top-color: #ccc; 
+  padding: 40px;
+  width: 583px;
+  zoom: 1;
+}
+.ie9 body.modal #modal-box { border-radius: 0 !important; }
+
+body.modal #modal-box.login-box {
+  background-color: #4b555d;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#01256e),to(#405894));
+  background-image: -webkit-linear-gradient(top,#01256e,#405894);
+  background-image: -moz-linear-gradient(top,#01256e,#405894);
+  background-image: -ms-linear-gradient(top,#01256e,#405894);
+  background-image: -o-linear-gradient(top,#01256e,#405894);
+  background-image: linear-gradient(top,#01256e,#405894);
+  border: none;
+  color: #b3b3b3;
+  height: 331px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#01256e',EndColorStr='#405894')";
+  padding: 20px;
+  width: 623px;
+  zoom: 1;
+}
+.ie9 body.modal #modal-box.login-box { border-radius: 0 !important; }
+
+body.modal #modal-box.login-box h1 {
+  background: url(https://s3.amazonaws.com/SSL_Assets/wharton/wharton_canvas.png) transparent no-repeat;
+  height: 185px;
+  margin: -10px 0px 0px 135px;
+  text-indent: -999em;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+  body.modal #modal-box.login-box h1 {
+    background: url(https://s3.amazonaws.com/SSL_Assets/wharton/wharton_canvas.png) transparent no-repeat;
+    background-size: 100% auto;
+  }
+}
+
+body.modal #modal-box h2 {
+  background: transparent url(/images/canvas-dark.png?1343405934) right top no-repeat;
+  margin: 0 20px;
+  min-height: 35px;
+  padding:5px 230px 0 0;
+}
+
+#flash_notice_message, #flash_error_message { background-color: #981E32 !important; }
+

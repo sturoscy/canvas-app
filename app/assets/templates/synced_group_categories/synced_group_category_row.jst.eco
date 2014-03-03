@@ -1,0 +1,17 @@
+<td class="group_category_id">
+  <a href="https://wharton.instructure.com/courses/<%= @course_id %>/groups" target="_blank"><%= @group_category_id %></a>
+</td>
+<td class="group_category_name"><%= @group_category_name %></td>
+<td class="course_id"><%= @course_id %></td>
+<td class="course-name"><%= @course_code %></td>
+<td class="date-synced"><%= @created_at %></td>
+<td class="last-synced"><%= @updated_at %></td>
+<% if @deleted: %>
+  <td class="status"><span class="label label-important">deleted</span></td>
+  <td></td>
+<% else: %>
+  <td class="status"><span class="label label-important">active</span></td>
+  <td style="text-align: center;" class="clear-section-groups">
+    <span><i class="icon-remove-sign"></i></span>
+  </td>
+<% end %>

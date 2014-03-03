@@ -1,0 +1,12 @@
+@import "bootstrap";
+
+.report-output {
+  .appointments-in-group { margin-left: 25px; }
+  .course_name { margin-bottom: 10px; }
+  .user-list {
+    dt { width: 170px; }
+    dd { margin-left: 180px; } 
+  }
+
+  h5 { text-decoration: underline; }
+}

@@ -1,0 +1,5 @@
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h5><%= @error %></h5>
+  <%= @comment %>
+</div>

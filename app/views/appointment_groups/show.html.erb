@@ -1,0 +1,75 @@
+<!-- Have to use inline CSS so that print styles are applied correctly  -->
+<!-- Not an elegant solution, but it is what it is                      -->
+<% if @appointment_groups.length > 0 %>
+  <% @appointment_groups.each do |appointment_group| %>
+    <div id="<%= appointment_group.id %>_overall" class="row">
+      <div class="span8">
+        <div id="<%= appointment_group.id %>" class="report-output">
+
+          <div>
+            <h3><a target="_blank" href="<%= appointment_group.html_url %>"><%= appointment_group.title %></a></h3>
+            <div class="course-name" style="margin-bottom: 10px;"><%= @course_details[2] %></div>
+          </div>
+
+          <ul id="<%= appointment_group.id %>" class="group-list unstyled">
+            <li><strong>Description: </strong><%= appointment_group.description %></li>
+            <li><strong>Location: </strong><%= appointment_group.location_name %></li>
+          </ul>
+
+          <h5 style="text-decoration: underline;">Appointments in Group</h5>
+          <div class="appointments-in-group" style="margin-left: 25px;">
+            <% appointment_group.appointments.each_with_index do |appointment, index| %>
+              <div><strong>Appointment <%= (index + 1 ) %></strong></div>
+              <ul class="unstyled">
+                <% start_at = appointment.start_at.to_time %>
+                <% end_at   = appointment.end_at.to_time %>
+
+                <li>Start: <%= start_at.strftime("%D %l:%M:%S %p") %></li>
+                <li>End: <%= end_at.strftime("%D %l:%M:%S %p") %></li>
+              </ul>
+
+              <h5>Attendees</h5> 
+              <ul class="unstyled">
+                <% if appointment.child_events.length >= 1 %>
+                  <% appointment.child_events.each do |child_event| %>
+
+                    <% if child_event.group? %>
+                      <li><strong>Attendees are in Course Group</strong> <span class="label label-important"><%= child_event.group.name %></span></li>
+                      <% child_event.group.users.each do |user| %>
+                        <li><%= user.sortable_name %></li>
+                      <% end %>
+                    <% else %>
+                      <% if child_event.user? %>
+                        <li><%= child_event.user.sortable_name %></li>
+                      <% end %>
+                    <% end %>
+
+                  <% end %>
+                <% else %>
+                  <li><strong>No Attendees</strong></li>
+                <% end %>
+              </ul>
+
+              <hr />
+            <% end %>
+          </div>
+
+        </div>
+        <button class="<%= appointment_group.id %> btn print-group">Send Group Data to pdf</button>
+      </div>
+    </div>
+    <hr />
+  <% end %>
+<% else %>
+  <div class="row">
+    <div class="span12">
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>No Results</h4>
+        Please check your inputs and try again.
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

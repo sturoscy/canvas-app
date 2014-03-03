@@ -1,0 +1,4 @@
+<td class="<%= @group_id %>"><a href="https://wharton.instructure.com/courses/<%= @course_id %>/groups/<%= @group_id %>" target="_blank"><%= @group_id %></a></td>
+<td id="group_name"><%= @group_name %></td>
+<td><%= @section_id %></td>
+<td colspan="6"><%= @section_name %></td>

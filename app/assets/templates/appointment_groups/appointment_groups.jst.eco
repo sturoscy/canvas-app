@@ -1,0 +1,72 @@
+<!-- Have to use inline CSS so that print styles are applied correctly  -->
+<!-- Not an elegant solution, but it is what it is                      -->
+<% if @appointment_groups.length > 0: %>
+  <% for appointment_group in @appointment_groups: %>
+    <div id="<%= appointment_group.id %>_overall" class="row">
+      <div class="span8">
+        <div id="<%= appointment_group.id %>" class="report-output">
+
+          <div>
+            <h3><a target="_blank" href="<%= appointment_group.html_url %>"><%= appointment_group.title %></a></h3>
+          </div>
+
+          <ul id="<%= appointment_group.id %>" class="group-list unstyled">
+            <li><strong>Description: </strong><%= appointment_group.description %></li>
+            <li><strong>Location: </strong><%= appointment_group.location_name %></li>
+          </ul>
+
+          <h5 style="text-decoration: underline;">Appointments in Group</h5>
+          <div class="appointments-in-group" style="margin-left: 25px;">
+            <% for appointment, index in appointment_group.appointments: %>
+              <div><strong>Appointment <%= (index + 1 ) %></strong></div>
+              <ul class="unstyled">
+                <% start_at = new Date appointment.start_at %>
+                <% end_at   = new Date appointment.end_at %>
+
+                <li>Start: <%= start_at.toLocaleDateString() + ' ' + start_at.toLocaleTimeString() %></li>
+                <li>End: <%= end_at.toLocaleDateString() + ' ' + end_at.toLocaleTimeString() %></li>
+              </ul>
+
+              <h5>Attendees</h5> 
+              <ul class="unstyled">
+                <% if appointment.child_events.length >= 1: %>
+                  <% for child_event in appointment.child_events: %>
+
+                    <% if child_event.group?: %>
+                      <li><strong>Attendees are in Course Group</strong> <span class="label label-important"><%= child_event.group.name %></span></li>
+                      <% for user in child_event.group.users: %>
+                        <li><%= user.sortable_name %></li>
+                      <% end %>
+                    <% else: %>
+                      <% if child_event.user?: %>
+                        <li><%= child_event.user.sortable_name %></li>
+                      <% end %>
+                    <% end %>
+
+                  <% end %>
+                <% else: %>
+                  <li><strong>No Attendees</strong></li>
+                <% end %>
+              </ul>
+
+              <hr />
+            <% end %>
+          </div>
+
+        </div>
+        <button class="<%= appointment_group.id %> btn print-group">Send Group Data to pdf</button>
+      </div>
+    </div>
+    <hr />
+  <% end %>
+<% else: %>
+  <div class="row">
+    <div class="span12">
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>No Results</h4>
+        Please check your inputs and try again.
+      </div>
+    </div>
+  </div>
+<% end %>

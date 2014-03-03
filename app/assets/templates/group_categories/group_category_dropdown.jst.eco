@@ -1,0 +1,15 @@
+<label id="group-category-dropdown-label" for="group-categories">Group Categories for Course ID: <%= @course_id %></label>
+<p class="group-category-dropdown-load"></p>
+<% if @categories: %>
+  <select id="group-category-dropdown" class="selectpicker" name="group-categories">
+    <option value="">Choose a Category</option>
+    <% for category in @categories: %>
+      <option value="<%= category.id%>"><%= category.name %></option>
+    <% end %>
+  </select>
+<% else: %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Course not found</strong> Check Course ID
+  </div>
+<% end %>

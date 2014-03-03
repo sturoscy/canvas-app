@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="span12">
+		<div class="page-header">
+			<h1>List Courses <small>in a specified sub-account</small></h1>
+		</div>
+		<div class="btn-group">
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+				Sub-Accounts
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				<li><%= link_to "Wharton School", courses_path + "/81471" %></li>
+			</ul>
+		</div>
+		<div id="courses">
+			<% unless (@courses.nil?) %>
+				<ol>
+				<% @courses.each do |course| %>
+					<li><%= course['name'] %></li>
+				<% end %>
+				</ol>
+			<% else %>
+				<div class="alert alert-info">
+					<h4>Please choose a sub-account from the list above</h4>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div> 

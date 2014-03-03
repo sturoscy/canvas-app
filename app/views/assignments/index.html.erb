@@ -1,0 +1,119 @@
+<div id="add-assignment">
+  <div class="row">
+    <div class="span12"> 
+      <div class="page-header">
+        <h1>Create Assignments <small>using the form below</small></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+        <div class="span4">
+          <h5>Assignment Details</h5>
+          <%= label_tag(:course_id, "Enter the course ID") %>
+          <%= text_field_tag(:course_id, nil, placeholder: "735802") %>
+
+          <%= label_tag(:name, "Enter the assignment name") %>
+          <%= text_field_tag(:name, nil, placeholder: "Assignment One") %>
+
+          <%= label_tag(:points_possible, "Enter the number of points possible") %>
+          <%= text_field_tag(:points_possible, nil, placeholder: "25") %>
+
+          <%= label_tag(:grading_type, "Select the grading type") %>
+          <%= select_tag(:grading_type, options_for_select(@grading_types)) %>
+
+          <%= label_tag(:submission_types, "Select the submission type") %>
+          <%= select_tag(:submission_types, options_for_select(@submission_types)) %>
+
+          <%= label_tag(:due_at, "Due date") %>
+          <%= text_field_tag(:due_at, nil, placeholder: "Any date string will do") %>
+
+          <div class="clearfix"></div>
+
+          <button id="add-to-table" class="btn btn-primary">Add Assignment to Queue</button>
+          
+          <br />
+
+          <div class="errors"></div>
+        </div>
+        <div class="span8">
+          <h5>Additional Assignment Details</h5>
+          <div id="nicedit-assignment-description">
+            <%= label_tag(:assignment_description, "Assignment description") %>
+            <%= text_area(:assignment, :description, :class => "assignment_description") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="page-header">
+        <h1>Results <small>Assignments will be added as is according to table</small></h1>
+        <span class="label">Double-click an entry to edit it.</span>
+      </div>
+      <table id="assignments" class="table table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th>Course ID</th> 
+            <th>Name</th>
+            <th>Points Possible</th>
+            <th>Grading Type</th>
+            <th>Submission Type</th>
+            <th>Due At</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+      </table>
+
+      <div id="create-courses" class="btn-group">
+        <a id="assignment-action-button-group" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Assignment Actions <span class="caret"></span> 
+        </a>
+        <ul class="dropdown-menu">
+          <li><a id="clear-assignments"><i class="icon-remove-sign"></i> Clear Assignments</a></li>
+          <li><a id="add-to-canvas"><i class="icon-plus"></i> Add Assignments to Canvas</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<div id="loading-modal" class="modal hide fade" role="dialog">
+  <div class="modal-header">
+    <h3>Loading Data into Canvas</h3>
+  </div>
+  <div class="modal-body loading"></div>
+</div>
+<script type="text/template" id="assignment-template">
+  <td id="course_id" class="course_id">
+    <div>{{course_id}}</div>
+    <input class="edit" value="{{course_id}}">
+  </td>
+  <td id="name" class="name">
+    <div>{{name}}</div>
+    <input class="edit" value="{{name}}">
+  </td>
+  <td id="points_possible" class="points_possible">
+    <div>{{points_possible}}</div>
+    <input class="edit" value="{{points_possible}}">
+  </td>
+  <td id="grading_type" class="grading_type">
+    <div>{{grading_type}}</div>
+    <input class="edit" value="{{grading_type}}">
+  </td>
+  <td id="due_at" class="due_at">
+    <div>{{due_at}}</div>
+    <input class="edit" value="{{due_at}}">
+  </td>
+  <td id="description" class="description">
+    <div class="expander">{{description}}</div>
+    <textarea rows="10" cols="50" class="edit">{{description}}</textarea>
+  </td>
+  <td><button id="delete" class="btn btn-danger">Delete</button></td>
+</script>

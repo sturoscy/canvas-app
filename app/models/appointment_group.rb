@@ -1,0 +1,2 @@
+class AppointmentGroup < ApplicationModel
+end

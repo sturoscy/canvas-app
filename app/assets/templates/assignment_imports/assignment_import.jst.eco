@@ -1,0 +1,29 @@
+<td id="course_id" class="course_id">
+  <div><%= @course_id %></div>
+  <input class="edit" value="<%= @course_id %>">
+</td>
+<td id="name" class="name">
+  <div><%= @name %></div>
+  <input class="edit" value="<%= @name %>">
+</td>
+<td id="points_possible" class="points_possible">
+  <div><%= @points_possible %></div>
+  <input class="edit" value="<%= @points_possible %>">
+</td>
+<td id="grading_type" class="grading_type">
+  <div><%= @grading_type %></div>
+  <input class="edit" value="<%= @grading_type %>">
+</td>
+<td id="submission_types" class="submission_types">
+  <div><%= @submission_types %></div>
+  <input class="edit" value="<%= @submission_types %>">
+</td>
+<td id="due_at" class="due_at">
+  <div><%- @due_at %></div>
+  <input class="edit" value="<%= @due_at %>">
+</td>
+<td id="description" class="description">
+  <div class="expander"><%= @description %></div>
+  <textarea rows="10" cols="50" class="edit"><%= @description %></textarea>
+</td>
+<td><button id="delete" class="btn btn-danger">Delete</button></td>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Canvas Web Apps at Wharton</title>
+    <%= stylesheet_link_tag     "application", :media => "screen" %>
+    <%= javascript_include_tag  "application" %>
+    <%= render 'layouts/shim' %>
+    <%= yield :head %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "Wharton Courseware", root_path, class: "brand" %>
+          <ul class="nav pull-right">
+
+            <li class="divider-vertical"></li>
+            <li>
+              <% if session[:masquerade_as].nil? %>
+                <%= form_tag("/users/masquerade", class: "form-inline pull-left") do %>
+                  <div class="input-prepend">
+                    <span class="add-on"><i class="fa fa-user"></i></span>
+                    <%= text_field_tag(:user_id, nil, :placeholder => "Start typing user's name", class: "span3 masquerade-input sis_user_id") %>
+                  </div>
+                  <button type="submit" class="btn btn-inverse masquerade">Masquerade</button>
+                <% end %>
+              <% else %>
+                <%= form_tag("/users/masquerade", class: "navbar-form pull-left") do %>
+                  <button type="submit" class="btn btn-inverse stop-masquerade">Stop Masquerading</button>
+                <% end %>
+              <% end %>
+            </li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Canvas API Actions
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href=<%= appointment_groups_path %>><i class="fa fa-calendar"></i> Appointment Groups</a></li>
+                <li class="divider"></li>
+                <li><a href=<%= assignments_path %>> <i class="fa fa-list-alt"></i> Assignments</a></li>
+                <li class="divider"></li>
+                <li><a href=<%= synced_group_categories_path %>> <i class="fa fa-users"></i> Sync Sections as Groups</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div> 
+      </div>
+    </div>
+
+    <div id="content" class="container">
+      <%= yield %>
+    </div> 
+
+    <div id="footer">
+      <% if session[:masquerade_as] %>
+        <div id="masquerade-info">
+          <div class="alert alert-info">
+            <i class="fa fa-exclamation-circle"></i> Masquerading as <strong><%= session[:masquerade_as] %></strong>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </body>
+</html> 

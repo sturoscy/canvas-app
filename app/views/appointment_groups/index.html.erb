@@ -1,0 +1,47 @@
+<div id="appointment-groups">
+  <div class="row">
+    <div class="span12">
+      <div class="page-header">
+        <h1>Appointment Groups <small>create printer friendly reports</small></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="well">
+        <div id="course-details">
+          <h5>Enter the Course Identifier</h5>
+          <div class="form-inline">
+            <div class="input-prepend">
+              <span class="course-id-tool add-on"><i class="icon-question-sign"></i></span>
+              <%= text_field_tag(:course_id, nil, placeholder: "Canvas Course ID - 1166769", class: "input-xlarge") %>
+            </div>
+            <label><span class="label label-info">OR</span></label>
+            <div class="input-prepend">
+              <span class="sis-course-id-tool add-on"><i class="icon-question-sign"></i></span>
+              <%= text_field_tag(:sis_course_id, nil, placeholder: "Course SIS ID - 2013CLGST210", class: "input-xlarge") %>
+            </div>
+          </div>
+        </div>
+
+        <div id="past-appointments">
+          <label class="checkbox">
+            <input id="past-appointments-check" type="checkbox"> Include Appointments in the Past?
+          </label>
+        </div>
+
+        <button id="run-ap-report" class="btn btn-primary">Run Report</button>
+        <button id="clear-ap-data" class="btn">Clear Data</button> 
+      </div>
+      <div class="errors"></div>
+      <%= render partial: "shared/status_report" %>
+    </div>
+  </div>
+    
+  <div class="row">
+    <div id="all-output" class="span12"></div>
+  </div>
+
+  </div>
+</div>

@@ -1,0 +1,1 @@
+class CanvasApp.Models.AppointmentGroup extends Backbone.Model

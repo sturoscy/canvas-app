@@ -1,0 +1,2 @@
+class GroupCategory < ApplicationModel
+end

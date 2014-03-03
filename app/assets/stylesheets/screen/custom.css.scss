@@ -1,0 +1,201 @@
+$gridColumnWidth: 70px;
+
+@import "bootstrap";
+@import "font-awesome";
+
+html {
+  overflow-y: scroll;
+}
+
+body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+iframe {
+  border: 1px solid black; 
+  height: 370px; 
+  margin-top: 15px; 
+  width: 286px;
+}
+
+// input[type="checkbox"] { margin: 0px; }
+.input-disabled { padding: 4px 6px; }
+
+/* Mixins */
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Main Page Areas */
+#header {
+  background-color: #002C77;
+  height: 64px;
+  padding: 20px 0 20px 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Masquerade form in navbar */
+.navbar { 
+  form { margin: 6px 0px; } 
+
+  .masquerade, .stop-masquerade { 
+    margin-top: 0px;
+    padding: 5px 14px; 
+  }
+}
+
+#footer { 
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+
+  .alert { margin-bottom: 0px; }
+}
+
+/* Courses, Sections, Assignments, etc CSS */
+#add-assignment { 
+  margin-bottom: 50px;
+
+  #assignment_description { min-height: 257px; } 
+}
+#add-data { margin-bottom: 50px; }
+
+#add-to-table { margin-top: 15px; }
+
+#appointment-groups {
+  #course-details label { padding: 0 5px; }
+}
+
+#courses-table {
+  ol, .alert-info {
+    margin-top: 30px;
+  }
+  
+  #course-section-action-button-group { ul { text-align: left; } }
+
+  .alert {
+    margin-bottom: 0px;
+    padding: 0px;
+  }
+
+}
+
+#courses-table, #sections-table {
+  th.center-align, td.center-align {
+    text-align: center;
+  }
+}
+
+#courses-table, #sections-table, #assignments {
+  tr td .edit {display: none;}
+  tr td.editing div {display: none;}
+  tr td.editing .edit {display: block;}
+}
+
+.report-output {
+  .appointments-in-group { margin-left: 25px; }
+  .course_name { margin-bottom: 10px; }
+  .user-list {
+    dt { width: 200px; }
+    dd { margin-left: 210px; } 
+  }
+
+  h5 { text-decoration: underline; }
+}
+
+#override-data { display: none; }
+
+.remove-override { margin-left: 10px; }
+
+.section-list { margin-right: 10px; }
+
+#user-details, #past-appointments { margin: 15px 0; } 
+#user-details {
+  #user-input {
+    .appended { display: none; }
+  }
+}
+
+/* Group Sync */
+#sync-instructions { display: none; margin-top: 35px; }
+#sync-instructions.alert { margin-bottom: 0px; }
+.bootstrap-select:not([class*="span"]), .uneditable-input { width: 270px; }
+.groups-sections { margin-top: 25px; }
+.manual-group { margin-right: 5px; }
+.manual-sync-buttons { margin-top: 25px; }
+
+/* IDs & Classes */
+#add_default_section { margin-top: -3px; }
+#add_section_button { width: 117.5px; }
+
+.center { text-align: center; }
+
+#content { margin-top: 100px; }
+
+.loading {
+  background: url("/assets/ajax-loader-new.gif") center no-repeat;
+  height: 300px;
+}
+
+p.lead { margin-bottom: 12px; }
+
+span.details { display: inline; }
+
+.section-warn { margin-bottom: 10px; }
+
+.section-checkbox-label, .wemba-checkbox-label { display: inline-block; }
+
+/* JQuery UI Autocomplete */
+ul.ui-autocomplete {
+  list-style-type: none;
+  width: inherit;
+
+  li { 
+    list-style-type: none; 
+    width: inherit;
+  }
+}
+
+/* Pagination CSS */
+.pagination { 
+  a.first_link { border-left: 1px solid #dddddd; }
+}
+
+/* forms */
+select {
+  border: 1px solid #bbb;
+  margin-bottom: 15px;
+  width: 100%;
+  @include box_sizing;
+}
+
+input, textarea, .uneditable-input {
+  border: 1px solid #bbb;
+  height: auto !important;
+  margin-bottom: 15px;
+  width: 100%;
+  @include box_sizing;
+}
+
+textarea { resize: vertical; }
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}

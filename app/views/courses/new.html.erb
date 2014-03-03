@@ -1,0 +1,193 @@
+<div id="add-course">
+  <div class="row">
+    <div class="span12"> 
+      <div class="page-header">
+        <h1>Create Courses <small>using the form below</small></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="well">
+        <div class="row">
+          <div class="span4">
+            <h5>Main Course Components</h5>
+            
+            <%= label_tag(:year, "Enter the academic year") %>
+            <%= text_field_tag(:year, nil, placeholder: "2013") %>
+
+            <%= label_tag(:term, "Select the academic term") %>
+            <%= select_tag(:term, options_for_select(@terms)) %>
+
+            <%= label_tag(:department, "Select the department (sub-account)") %>
+            <select id="department" name="department">
+              <% @api_accounts.each do |account| %>
+                <% unless (/WEMBA/.match(account.sis_account_id)) %>
+                  <option value="<%= account.sis_account_id %>"><%= account.name %></option>
+                <% end %>
+                <% @api_sub_accounts.each do |sub_account| %>
+                  <% if (sub_account.parent_account_id == account.id) %>
+                    <% unless (/WEMBA/.match(sub_account.sis_account_id)) %>
+                      <option value="<%= sub_account.sis_account_id %>"><%= "&nbsp;&nbsp;&raquo; #{sub_account.name}".html_safe %></option>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </select>
+
+            <%= label_tag(:wemba_course, "WEMBA Course?", class: "wemba-checkbox-label") %>
+            <%= check_box_tag(:wemba_course, nil, false, class: "wemba-checkbox") %>
+
+            <select id="wemba-course" name="wemba-course">
+              <% @wemba_accounts.each do |wemba| %>
+                <option value="<%= wemba.sis_account_id %>"><%= wemba.name %></option>
+              <% end %>
+            </select>
+
+            <%= label_tag(:course_number, "Enter the primary course number and any cross-listings") %>
+            <%= text_field_tag(:course_number, nil, placeholder: "101 or 101/102") %>
+          </div>
+          <div class="span4 offset2">
+            <h5>Supplementary Course Components</h5>
+
+            <%= label_tag(:append_course_cross_listing, "Append a course cross-listing and number") %>
+            <%= text_field_tag(:append_course_cross_listing, nil, placeholder: "FNCE 730 or FNCE/REAL 730") %>
+
+            <%= label_tag(:append_instructor_name, "Append an instructor's name") %>
+            <%= text_field_tag(:append_instructor_name, nil, placeholder: "Smith") %>
+
+            <!-- Commenting in Favor of Canvas's Default Section
+            <h5>Section Specific Data</h5>
+            <%= check_box_tag(:add_default_section) %>
+            <%= label_tag(:add_default_section, "Add default section to course?", class: "section-checkbox-label") %>
+            -->
+
+            <h5>
+              Instructor SIS ID <br />
+              <small><i class="icon-info-sign"></i> This will create a "teacher" enrollment in a default section.</small>
+              <small>This is not required and will be ignored if not entered.</small>
+            </h5>
+            <%= text_field_tag(:inst_sis_id, nil, placeholder: "77777777") %>
+            <br /><br />
+
+            <button id="add-to-table" class="btn btn-primary">Add Course to Table</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <div class="page-header">
+        <h1>Results <small>Double-click an entry to edit it.</small></h1>
+      </div>
+      <h3>Courses</h3>
+      <table id="courses-table" class="table table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th>Course ID</th> 
+            <th>Short Name</th>
+            <th>Long Name</th>
+            <th>Account ID</th>
+            <th>Term ID</th>
+            <th>Faculty SIS ID</th>
+            <th>Status</th>
+            <th class="center-align">Actions</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="btn-group">
+        <a id="course-action-button-group" href="#" class="btn dropdown-toggle" data-toggle="dropdown">
+          Course Actions <span class="caret"></span> 
+        </a>
+        <ul class="dropdown-menu">
+          <li><a id="clear-courses"><i class="icon-remove-sign"></i> Clear Courses</a></li>
+          <li><a id="check-courses"><i class="icon-check"></i> Check Duplicates</a></li>
+        </ul>
+      </div>
+      <div class="course-errors"></div>
+      
+      <h3>Sections</h3>
+      <div id="error"></div> 
+      <table id="sections-table" class="table table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th>Section ID</th> 
+            <th>Course ID</th>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Primary Crosslist</th>
+            <th>Instructor</th>
+            <th class="center-align">Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="btn-group">
+        <a id="section-action-button-group" class="btn dropdown-toggle" data-toggle="dropdown">
+          Section Actions <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a id="clear-sections"><i class="icon-remove-sign"></i> Clear Sections</a></li>
+        </ul>
+      </div>
+      <div class="section-errors"></div>
+
+      <hr />
+      <div id="create-data">
+        <button id="add-to-canvas" class="btn btn-primary">Add Data to Canvas</button>
+        <button id="import-template" class="btn btn-primary">Import Course Template</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="loading-modal" class="modal hide fade" role="dialog">
+  <div class="modal-header">
+    <h3>Processing data.</h3>
+  </div>
+  <div class="modal-body loading"></div>
+</div>
+
+<div id="sections-modal" class="modal hide fade" role="dialog">
+  <div class="modal-header">
+    <h3>Add Additional Sections to Course</h3>
+  </div>
+  <div class="modal-body">
+    
+    <h5>Add multiple sections with similar IDs and names</h5>
+    <%= label_tag(:modal_section_id, "Section ID minus section number") %>
+    <%= text_field_tag(:modal_section_id, nil, placeholder: "2013AACCT101", class: "span4") %>
+
+    <%= label_tag(:modal_section_name, "Section Name minus section number") %>
+    <%= text_field_tag(:modal_section_name, nil, placeholder: "ACCT101 - Spring 2013", class: "span4") %>
+
+    <%= label_tag(:modal_num_sections, "Number of sections to add") %>
+    <%= text_field_tag(:modal_num_sections, nil, class: "span4") %>
+
+    <label>Add section specific start and end dates <i class="section-dates icon-question-sign"></i></label>
+    <%= text_field_tag(:modal_section_start, nil, placeholder: "Section Start", class: "span4") %>
+    <%= text_field_tag(:modal_section_end, nil, placeholder: "Section End", class: "span4") %>
+    <br /><br />
+    
+    <button id="add-to-textarea" class="btn btn-primary">Add to textarea</button>
+    
+    <hr />
+    
+    <h5>Add multiple sections one line at a time</h5>
+    <p>Section information should be added one per line with a comma separating section id and section name.</p>
+    <ul class="unstyled">
+      <li><strong>Example</strong></li>
+      <li>2013AACCT101001, ACCT101 - 001 - Spring 2013</li>
+      <li>2013AACCT101002, ACCT101 - 002 - Spring 2013</li>
+    </ul>
+    <%= text_area(:additional, :sections, :class => "additional_sections") %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hiddent="true">Close</button>
+    <button id="add-sections-modal" class="btn btn-primary" aria-hidden="true">OK, Looks Good</button>
+  </div>
+</div>

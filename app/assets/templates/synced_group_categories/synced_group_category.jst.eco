@@ -1,0 +1,38 @@
+<tr>
+  <th>Group Category ID</th>
+  <th>Group Category Name</th>
+  <th>Course ID</th>
+  <th>Course Name</th>
+  <th>Date Synced</th>
+  <th>Last Synced</th>
+  <th>Status</th>
+  <th style="text-align: center;">Clear Sync</th>
+</tr>
+<tr>
+  <td class="group_category_id">
+    <a href="https://wharton.instructure.com/courses/<%= @course_id %>/groups" target="_blank"><%= @group_category_id %></a>
+  </td>
+  <td class="group_category_name"><%= @group_category_name %></td>
+  <td class="course_id"><%= @course_id %></td>
+  <td class="course-name"><%= @course_code %></td>
+  <td class="date-synced"><%= @created_at %></td>
+  <td class="last-synced"><%= @updated_at %></td>
+  <td class="status"><span class="label label-success">active</span></td>
+  <td style="text-align: center;" class="clear-section-groups">
+    <span><i class="icon-remove-sign"></i></span>
+  </td>
+</tr>
+<tr data-groupcategoryid="<%= @group_category_id %>">
+  <th>Group ID</th>
+  <th>Group Name(s)</th>
+  <th>Section ID</th>
+  <th colspan="6">Section Name</th>
+</tr>
+<% for group in @synced_groups: %>
+  <tr class="active info" data-groupcategoryid="<%= @group_category_id %>">
+    <td class="<%= group.group_id %>"><a href="https://wharton.instructure.com/courses/<%= @course_id %>/groups/<%= group.group_id %>" target="_blank"><%= group.group_id %></a></td>
+    <td id="group_name"><%= group.group_name %></td>
+    <td><%= group.section_id %></td>
+    <td colspan="6"><%= group.section_name %></td>
+  </tr>
+<% end %>
